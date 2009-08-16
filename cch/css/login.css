@@ -1,0 +1,7 @@
+html,body {margin:0;padding:0;font-family: 'Verdana',sans-serif;font-size:11px;background: #f7f7f7;}
+body {background: transparent;}
+#logcont {margin: 150px auto;padding: 0;width: 350px;height:auto; background:#036 url(../images/azcapotzalco.gif) no-repeat 3px 25px; color:#fff;}
+
+#logcont h3{font-weight:bold;font-size:11px;text-align:center;color:#fff;border-bottom:1px solid #fff;margin:0;padding:0 0 3px 0;}
+
+#logcont legend {font-weight:bold;font-size:11px;text-align:center;color:#fff;}
