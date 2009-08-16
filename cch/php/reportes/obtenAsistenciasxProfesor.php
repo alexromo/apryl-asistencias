@@ -35,17 +35,21 @@ else
                 $table =  '<table width="95%" cellspacing="1" >'
                          .'<thead><tr><th colspan="2">RESUMEN</th></tr></thead>'
                          .'<tbody>';
+                $asistencias=$faltas=$faltasjustificadas=0;         
                 foreach ($rs as $k => $row)
                     {    
                         if ($row[0] == 1)
                             $asistencias = $row[1];
-                        else 
+                        if ($row[0] == 2)
                             $faltas = $row[1];
+                        if ($row[0] == 3)
+                            $faltasjustificadas = $row[1];        
                     }
-                    $table .= '<tr><th width="150">ASISTENCIAS</th><td><b>'.$asistencias.'</b> ('.sprintf("%01.2f",($asistencias/($faltas+$asistencias)*100)).'%)</td></tr>'; 
-                    $table .= '<tr><th width="150">FALTAS</th><td><b>'.$faltas.'</b> ('.sprintf("%01.2f",($faltas/($faltas+$asistencias)*100)).'%)</td></tr>';   
+                    $table .= '<tr><th width="150">ASISTENCIAS</th><td><b>'.$asistencias.'</b> ('.sprintf("%01.2f",($asistencias/($faltas+$faltasjustificadas+$asistencias)*100)).'%)</td></tr>'; 
+                    $table .= '<tr><th width="150">FALTAS</th><td><b>'.$faltas.'</b> ('.sprintf("%01.2f",($faltas/($faltas+$faltasjustificadas+$asistencias)*100)).'%)</td></tr>';
+                    $table .= '<tr><th width="150">FALTAS JUSTIFICADAS</th><td><b>'.$faltasjustificadas.'</b> ('.sprintf("%01.2f",($faltasjustificadas/($faltas+$faltasjustificadas+$asistencias)*100)).'%)</td></tr>';   
                 $table .= '</tbody></table><br />';
-                $js = '<script>DrawPieChart('.$asistencias.','.$faltas.');</script><input type="button" value="Muestra/Oculta Grafica " onclick="DrawPieChart('.$asistencias.','.$faltas.');$(\'graphcontainer\').toggle();" />';
+                $js = '<script>DrawPieChart('.$asistencias.','.$faltas.','.$faltasjustificadas.');</script><input type="button" value="Muestra/Oculta Grafica " onclick="DrawPieChart('.$asistencias.','.$faltas.','.$faltasjustificadas.');$(\'graphcontainer\').toggle();" />';
                 
                 # Asistencias Detalle
                 if ($db == 'mysql')
@@ -81,13 +85,13 @@ else
                 $query = "SELECT $fechahora, es.Edificio, es.Salon, rd.idRondin, us.nombre, ap.idJustificacion "
                          ." FROM AsistenciaProfesores ap, Rondin rd, EdificioSalon es, usuarios us"
                          ." WHERE ap.idProfesor = ".$idProfesor
-                         ." AND ap.idStatus = 2 "
+                         ." AND ap.idStatus in (2,3) "
                          ." AND ap.idRondin = rd.idRondin"
                          ." AND rd.status = 'S'"
                          ." AND rd.idCicloEscolar = ".$idCicloEscolar
                          ." AND ap.idSalon = es.idSalon"
                          ." AND rd.idEncargado = us.id"
-                         ." ORDER BY rd.FechaHora";
+                         ." ORDER BY rd.FechaHora,ap.idStatus";
                 $rs = $dbconn->Execute($query);
 
                 if (!$rs->fields) $table2 = '<div class="error">No hay Faltas Registradas</div>';
