@@ -7,13 +7,15 @@
 <script type="text/javascript" src="js/flotr/lib/canvastext.js"></script>
 <script type="text/javascript" src="js/flotr/flotr-0.2.0-alpha.js"></script> 
 <script type="text/javascript" charset="utf-8">
-function DrawPieChart(dato1,dato2)
+DrawPieChart = function(dato1,dato2,dato3)
 {
  var d1 = [[0, dato1]];
  var d2 = [[0, dato2]];
+ var d3 = [[0, dato3]];
  var f = Flotr.draw($('graphcontainer'), [ 
     {data:d1, label: "Asistencias"}, 
-    {data:d2, label: "Faltas"} 
+    {data:d2, label: "Faltas"},
+    {data:d3, label: "Faltas Justificadas"} 
     ], { 
         HtmlText: false, 
         grid: {
