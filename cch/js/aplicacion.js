@@ -9,7 +9,7 @@ function actualizaJustificantes() { new Ajax.Updater('lista','php/rondines/obten
 function actualizaJustificantesxProfesor(teacher) { new Ajax.Updater('justificantesxprofesor','php/reportes/obtenJustificantesxProfesor.php', { method: 'get',parameters: {profesor:teacher } });} 
 function actualizaDetalleJustificante(just) { new Ajax.Updater('lista','php/rondines/obtenDetalleJustificante.php', { method: 'get',parameters: {justificante:just } });} 
 function actualizaFaltasJustificadas(justif) { new Ajax.Updater('lista','php/rondines/obtenFaltasJustificadas.php', { method: 'get',parameters: {justificante: justif} });}
-function actualizaAsistenciasProfesor(teacher,semestre) { new Ajax.Updater('lista','php/reportes/obtenAsistenciasxProfesor.php', { method: 'get',parameters: {profesor: teacher,ciclo: semestre},evalScripts: true });}
+function actualizaAsistenciasProfesor(teacher,semestre) { new Ajax.Updater('lista','php/reportes/obtenAsistenciasxProfesor.php', { method: 'get',parameters: {profesor: teacher,ciclo: semestre} });}
 function actualizaAsistenciasArea(areaa,semestre) { new Ajax.Updater('lista','php/reportes/obtenAsistenciasxArea.php', { method: 'get',parameters: {area: areaa,ciclo: semestre} });} 
 function imprimeCaptEdificio(building) { new Ajax.Updater('edificiofrm','php/rondines/formaCapturaEdificio.php', { method: 'get',parameters: {edificio: building} });} 
 function imprimeRondinJF(rond) { new Ajax.Updater('lista','php/rondines/imprimeRondinJF.php', { method: 'get',parameters: {rondin: rond} });} 
