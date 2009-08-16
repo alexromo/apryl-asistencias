@@ -7,13 +7,15 @@
 <script type="text/javascript" src="js/flotr/lib/canvastext.js"></script>
 <script type="text/javascript" src="js/flotr/flotr-0.2.0-alpha.js"></script> 
 <script type="text/javascript" charset="utf-8">
-DrawPieChart = function(dato1,dato2)
+DrawPieChart = function(dato1,dato2,dato3)
 {
  var d1 = [[0, dato1]];
  var d2 = [[0, dato2]];
+ var d3 = [[0, dato3]];
  var f = Flotr.draw($('graphcontainer'), [ 
     {data:d1, label: "Asistencias"}, 
-    {data:d2, label: "Faltas"} 
+    {data:d2, label: "Faltas"},
+    {data:d3, label: "Faltas Justificadas"} 
     ], { 
         HtmlText: false, 
         grid: {
@@ -35,7 +37,7 @@ DrawPieChart = function(dato1,dato2)
 <fieldset>
 <h1>Reporte de Asistencia por Profesor</h1>  
 <label for="ciclo">Ciclo Escolar :</label>
-<select name="ciclo" id="ciclo" onchange="if ($F('profesor') != 0 && $F('ciclo') != 0) {$('graphcontainer').setStyle({'display':'none'});actualizaAsistenciasProfesor($F('profesor'),$F('ciclo'));}" > 
+<select name="ciclo" id="ciclo" onchange="if ($F('ciclo') != 0) insertaDropDownFilter('ProfesorCiclo','profesor','idcicloescolar',$F('ciclo')); if ($F('profesor') != 0 && $F('ciclo') != 0) {$('graphcontainer').setStyle({'display':'none'});actualizaAsistenciasProfesor($F('profesor'),$F('ciclo'));}" > 
 </select>
 <br />
 <label for="profesor">Profesor :</label>
@@ -53,7 +55,7 @@ DrawPieChart = function(dato1,dato2)
 
 <script type="text/javascript" charset="utf-8">
     insertaDropDown('CicloEscolar','ciclo');
-    insertaDropDown('Profesor','profesor'); 
+    //insertaDropDown('Profesor','profesor'); 
      
               
 </script>
