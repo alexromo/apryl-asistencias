@@ -89,6 +89,13 @@ else
     	        ." ORDER BY 2";
     	$option = '<option value="A" selected="selected" > Profesor ...</option>';	
     	break;
+    case 'ProfesorCiclo' :
+        $select = "SELECT DISTINCT ps.idProfesor,pf.Nombre FROM ProfesorSalon ps, Profesor pf"
+                ." WHERE ps.idProfesor = pf.idProfesor"
+                ." AND ps.".$_REQUEST['columna']." = ".$_REQUEST['valor']
+                ." ORDER BY 2";
+        $option = '<option value="A" selected="selected" > Profesor ...</option>';	
+        break;	
     case 'ProfesorJustificante' :
         if ($filter != '') $filter = " AND ".$filter;
       	$select = "SELECT DISTINCT jt.idProfesor, pr.Nombre"
